@@ -25,22 +25,22 @@ import {
 import { useAuth } from "@/lib/auth";
 import { resolvePostAuthDestination, SITE_URL } from "@/lib/destination";
 
-const OG_IMAGE = `${SITE_URL}/social/og-image.png`;
+const OG_IMAGE = `${SITE_URL}/brand/og-image.png`;
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Sign In | AcademicHub" },
+      { title: "Sign In | ScholarDesk" },
       {
         name: "description",
         content:
-          "Secure sign in for AcademicHub clients and writers. Access orders, messages, and your academic writing workspace.",
+          "Secure sign in for ScholarDesk clients and writers. Access orders, messages, and your academic writing workspace.",
       },
-      { property: "og:title", content: "Sign In | AcademicHub" },
+      { property: "og:title", content: "Sign In | ScholarDesk" },
       {
         property: "og:description",
         content:
-          "Secure sign in for AcademicHub clients and writers. Access orders, messages, and your academic writing workspace.",
+          "Secure sign in for ScholarDesk clients and writers. Access orders, messages, and your academic writing workspace.",
       },
       { property: "og:url", content: `${SITE_URL}/` },
       { property: "og:image", content: OG_IMAGE },
@@ -61,7 +61,7 @@ function LoginPage() {
           {
             title: "Privacy by design",
             description:
-              "Clients are identified by a chosen nickname — never a real name.",
+              "Clients are identified by a chosen nickname, never a real name.",
           },
           {
             title: "Verified expertise",
@@ -152,7 +152,7 @@ function LoginForm() {
         </h2>
         <p className="text-muted-foreground">
           {step === "credentials"
-            ? "Sign in to continue to your AcademicHub portal."
+            ? "Sign in to continue to your ScholarDesk portal."
             : `We sent a 6-digit passcode to ${email}.`}
         </p>
       </div>
@@ -263,7 +263,7 @@ function LoginForm() {
       )}
 
       <p className="text-center text-sm text-muted-foreground">
-        New to AcademicHub?{" "}
+        New to ScholarDesk?{" "}
         <Link
           to="/register"
           className="font-semibold text-primary hover:underline"

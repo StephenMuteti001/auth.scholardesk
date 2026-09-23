@@ -15,6 +15,7 @@ import { Route as RegisterRouteImport } from './routes/register'
 import { Route as WriterOnboardingRouteImport } from './routes/writer-onboarding'
 import { Route as RegisterIndexRouteImport } from './routes/register/index'
 import { Route as RegisterClientRouteImport } from './routes/register/client'
+import { Route as RegisterCustomerRouteImport } from './routes/register/customer'
 import { Route as RegisterWriterRouteImport } from './routes/register/writer'
 import { Route as WriterOnboardingApplyRouteImport } from './routes/writer-onboarding.apply'
 import { Route as WriterOnboardingApprovedRouteImport } from './routes/writer-onboarding.approved'
@@ -51,6 +52,11 @@ const RegisterClientRoute = RegisterClientRouteImport.update({
   path: '/client',
   getParentRoute: () => RegisterRoute,
 } as any)
+const RegisterCustomerRoute = RegisterCustomerRouteImport.update({
+  id: '/customer',
+  path: '/customer',
+  getParentRoute: () => RegisterRoute,
+} as any)
 const RegisterWriterRoute = RegisterWriterRouteImport.update({
   id: '/writer',
   path: '/writer',
@@ -85,6 +91,7 @@ export interface FileRoutesByFullPath {
   '/register': typeof RegisterRouteWithChildren
   '/writer-onboarding': typeof WriterOnboardingRouteWithChildren
   '/register/client': typeof RegisterClientRoute
+  '/register/customer': typeof RegisterCustomerRoute
   '/register/writer': typeof RegisterWriterRoute
   '/writer-onboarding/apply': typeof WriterOnboardingApplyRoute
   '/writer-onboarding/approved': typeof WriterOnboardingApprovedRoute
@@ -97,6 +104,7 @@ export interface FileRoutesByTo {
   '/login': typeof LoginRoute
   '/writer-onboarding': typeof WriterOnboardingRouteWithChildren
   '/register/client': typeof RegisterClientRoute
+  '/register/customer': typeof RegisterCustomerRoute
   '/register/writer': typeof RegisterWriterRoute
   '/writer-onboarding/apply': typeof WriterOnboardingApplyRoute
   '/writer-onboarding/approved': typeof WriterOnboardingApprovedRoute
@@ -111,6 +119,7 @@ export interface FileRoutesById {
   '/register': typeof RegisterRouteWithChildren
   '/writer-onboarding': typeof WriterOnboardingRouteWithChildren
   '/register/client': typeof RegisterClientRoute
+  '/register/customer': typeof RegisterCustomerRoute
   '/register/writer': typeof RegisterWriterRoute
   '/writer-onboarding/apply': typeof WriterOnboardingApplyRoute
   '/writer-onboarding/approved': typeof WriterOnboardingApprovedRoute
@@ -126,6 +135,7 @@ export interface FileRouteTypes {
     | '/register'
     | '/writer-onboarding'
     | '/register/client'
+    | '/register/customer'
     | '/register/writer'
     | '/writer-onboarding/apply'
     | '/writer-onboarding/approved'
@@ -138,6 +148,7 @@ export interface FileRouteTypes {
     | '/login'
     | '/writer-onboarding'
     | '/register/client'
+    | '/register/customer'
     | '/register/writer'
     | '/writer-onboarding/apply'
     | '/writer-onboarding/approved'
@@ -151,6 +162,7 @@ export interface FileRouteTypes {
     | '/register'
     | '/writer-onboarding'
     | '/register/client'
+    | '/register/customer'
     | '/register/writer'
     | '/writer-onboarding/apply'
     | '/writer-onboarding/approved'
@@ -210,6 +222,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RegisterClientRouteImport
       parentRoute: typeof RegisterRoute
     }
+    '/register/customer': {
+      id: '/register/customer'
+      path: '/customer'
+      fullPath: '/register/customer'
+      preLoaderRoute: typeof RegisterCustomerRouteImport
+      parentRoute: typeof RegisterRoute
+    }
     '/register/writer': {
       id: '/register/writer'
       path: '/writer'
@@ -250,12 +269,14 @@ declare module '@tanstack/react-router' {
 
 interface RegisterRouteChildren {
   RegisterClientRoute: typeof RegisterClientRoute
+  RegisterCustomerRoute: typeof RegisterCustomerRoute
   RegisterWriterRoute: typeof RegisterWriterRoute
   RegisterIndexRoute: typeof RegisterIndexRoute
 }
 
 const RegisterRouteChildren: RegisterRouteChildren = {
   RegisterClientRoute: RegisterClientRoute,
+  RegisterCustomerRoute: RegisterCustomerRoute,
   RegisterWriterRoute: RegisterWriterRoute,
   RegisterIndexRoute: RegisterIndexRoute,
 }

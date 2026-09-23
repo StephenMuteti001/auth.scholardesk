@@ -51,20 +51,20 @@ function ApplicationWizard() {
   const { refresh } = useAuth();
   const [step, setStep] = useState(0);
 
-  // Step 1 — profile
+  // Step 1: profile
   const [phone, setPhone] = useState("");
   const [country, setCountry] = useState("");
   const [education, setEducation] = useState("");
   const [experience, setExperience] = useState("");
 
-  // Step 2 — proficiency
+  // Step 2: proficiency
   const [answers, setAnswers] = useState<Record<number, string>>({});
   const answeredCount = useMemo(() => Object.keys(answers).length, [answers]);
 
-  // Step 3 — writing prompts
+  // Step 3: writing prompts
   const [promptEssays, setPromptEssays] = useState<Record<string, string>>({});
 
-  // Step 4 — essay topic
+  // Step 4: essay topic
   const [topicId, setTopicId] = useState<string>("");
   const [essay, setEssay] = useState("");
 
@@ -118,7 +118,7 @@ function ApplicationWizard() {
           Writer application
         </h1>
         <p className="text-muted-foreground">
-          Step {step + 1} of {STEPS.length} — {STEPS[step]}
+          Step {step + 1} of {STEPS.length}: {STEPS[step]}
         </p>
       </div>
 

@@ -24,7 +24,7 @@ function ApprovedPage() {
           <BadgeCheck className="h-7 w-7 text-success" />
         </span>
         <h1 className="font-display mt-6 text-3xl font-bold tracking-tight">
-          Congratulations — you're approved!
+          Congratulations, you're approved!
         </h1>
         <p className="mx-auto mt-3 max-w-md leading-relaxed text-muted-foreground">
           Your application met our experience and skills requirements. One last
@@ -43,7 +43,7 @@ function ApprovedPage() {
               A one-time, refundable activation deposit confirms your commitment
               to the platform. Payment instructions are sent to{" "}
               <span className="font-medium text-foreground">{user?.email}</span>{" "}
-              — follow them and our team will activate your account.
+              and follow them; our team will activate your account once received.
             </p>
           </div>
         </div>
@@ -52,7 +52,7 @@ function ApprovedPage() {
           <Mail className="h-4 w-4 text-primary" />
           <AlertTitle className="text-primary">Waiting on your deposit</AlertTitle>
           <AlertDescription className="text-foreground/80">
-            Once your deposit is confirmed, AcademicHub activates your account
+            Once your deposit is confirmed, ScholarDesk activates your account
             and you'll complete your writer profile to start receiving orders.
           </AlertDescription>
         </Alert>

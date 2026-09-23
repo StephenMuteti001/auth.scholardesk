@@ -5,7 +5,7 @@ import { LogOut } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { RequireAuth } from "@/components/guards";
 import { useAuth } from "@/lib/auth";
-import logoMark from "@/assets/logo/mark-ac-dark.svg";
+import { Logo } from "@/components/brand/Logo";
 
 export const Route = createFileRoute("/writer-onboarding")({
   head: () => ({
@@ -23,7 +23,7 @@ function WriterOnboardingLayout() {
           <Outlet />
         </main>
         <footer className="border-t py-6 text-center text-xs text-muted-foreground">
-          AcademicHub · Writer onboarding
+          ScholarDesk · Writer onboarding
         </footer>
       </div>
     </RequireAuth>
@@ -44,8 +44,8 @@ function OnboardingHeader() {
   return (
     <header className="sticky top-0 z-20 border-b bg-card/90 backdrop-blur">
       <div className="mx-auto flex h-16 w-full max-w-3xl items-center justify-between px-4 sm:px-6">
-        <Link to="/writer-onboarding/apply" aria-label="AcademicHub writer onboarding">
-          <img src={logoMark} alt="AcademicHub" className="h-8 w-auto" />
+        <Link to="/writer-onboarding/apply" aria-label="ScholarDesk writer onboarding">
+          <Logo variant="wordmark" className="h-7" />
         </Link>
         <div className="flex items-center gap-3">
           <span className="hidden max-w-45 truncate text-sm text-muted-foreground sm:block">

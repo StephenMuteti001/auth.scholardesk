@@ -26,7 +26,7 @@ export function HiringClosed({ notice }: HiringClosedProps) {
         </h2>
         <p className="mx-auto mt-3 max-w-md leading-relaxed text-muted-foreground">
           {notice ??
-            "We're not accepting new writer applications at the moment. Our hiring window reopens periodically as demand grows — please check back soon."}
+            "We're not accepting new writer applications at the moment. Our hiring window reopens periodically as demand grows, so please check back soon."}
         </p>
 
         <Alert className="mx-auto mt-6 max-w-md border-primary/20 bg-primary/5 text-left">
@@ -38,15 +38,15 @@ export function HiringClosed({ notice }: HiringClosedProps) {
               href={PORTALS.PUBLIC}
               className="font-medium text-primary underline underline-offset-2"
             >
-              academichubpro.com
+              scholardesk.pro
             </a>{" "}
-            — hiring rounds are announced there first.
+            for updates; hiring rounds are announced there first.
           </AlertDescription>
         </Alert>
 
         <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
           <Button asChild>
-            <Link to="/register/client">Hire a writer instead</Link>
+            <Link to="/register/customer">Looking to hire an expert instead?</Link>
           </Button>
           <Button variant="outline" asChild>
             <Link to="/">Back to sign in</Link>

@@ -1,12 +1,12 @@
 import type { AuthUser } from "./api";
 
-/** The AcademicHub portal network this auth site signs users into. */
+/** The ScholarDesk portal network this auth site signs users into. */
 export const PORTALS = {
-  PUBLIC: "https://academichubpro.com",
-  AUTH: "https://auth.academichubpro.com",
-  WRITER: "https://writer.academichubpro.com",
-  CLIENT: "https://client.academichubpro.com",
-  ADMIN: "https://admin.academichubpro.com",
+  PUBLIC: "https://scholardesk.pro",
+  AUTH: "https://auth.scholardesk.pro",
+  EXPERT: "https://expert.scholardesk.pro",
+  CUSTOMER: "https://portal.scholardesk.pro",
+  ADMIN: "https://admin.scholardesk.pro",
 } as const;
 
 export const SITE_URL = PORTALS.AUTH;
@@ -16,13 +16,13 @@ export type Destination =
   | { type: "internal"; to: string };
 
 /**
- * Where a user goes after signing in, based on role and (for writers)
- * their onboarding status — mirrors the writer pipeline:
+ * Where a user goes after signing in, based on role and (for experts)
+ * their onboarding status; mirrors the expert pipeline:
  * apply -> review -> approved -> deposit -> activated -> profile.
  */
 export function resolvePostAuthDestination(user: AuthUser): Destination {
   switch (user.role) {
-    case "writer":
+    case "expert":
       switch (user.application_status) {
         case "not_applied":
           return { type: "internal", to: "/writer-onboarding/apply" };
@@ -33,19 +33,19 @@ export function resolvePostAuthDestination(user: AuthUser): Destination {
         case "rejected":
           return { type: "internal", to: "/writer-onboarding/rejected" };
         default:
-          return { type: "external", url: PORTALS.WRITER };
+          return { type: "external", url: PORTALS.EXPERT };
       }
     case "admin":
     case "super_admin":
       return { type: "external", url: PORTALS.ADMIN };
-    case "client":
-      return { type: "external", url: PORTALS.CLIENT };
+    case "customer":
+      return { type: "external", url: PORTALS.CUSTOMER };
     default:
       return { type: "external", url: PORTALS.PUBLIC };
   }
 }
 
-/** The internal onboarding page a writer's status maps to. */
+/** The internal onboarding page an expert's status maps to. */
 export function writerOnboardingPath(status: string | undefined): string {
   switch (status) {
     case "applied":

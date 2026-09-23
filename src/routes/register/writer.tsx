@@ -20,22 +20,22 @@ import { registerAccount, type AuthUser } from "@/lib/api";
 import { useAuth } from "@/lib/auth";
 import { resolvePostAuthDestination, SITE_URL } from "@/lib/destination";
 
-const OG_IMAGE = `${SITE_URL}/social/og-image.png`;
+const OG_IMAGE = `${SITE_URL}/brand/og-image.png`;
 
 export const Route = createFileRoute("/register/writer")({
   head: () => ({
     meta: [
-      { title: "Become a Writer | AcademicHub" },
+      { title: "Become a Writer | ScholarDesk" },
       {
         name: "description",
         content:
-          "Apply to join AcademicHub as an academic writer. Clear application steps, fair review, and reliable payouts for verified experts.",
+          "Apply to join ScholarDesk as an academic writer. Clear application steps, fair review, and reliable payouts for verified experts.",
       },
-      { property: "og:title", content: "Become a Writer | AcademicHub" },
+      { property: "og:title", content: "Become a Writer | ScholarDesk" },
       {
         property: "og:description",
         content:
-          "Apply to join AcademicHub as an academic writer. Clear application steps, fair review, and reliable payouts for verified experts.",
+          "Apply to join ScholarDesk as an academic writer. Clear application steps, fair review, and reliable payouts for verified experts.",
       },
       { property: "og:url", content: `${SITE_URL}/register/writer` },
       { property: "og:image", content: OG_IMAGE },
@@ -53,7 +53,7 @@ function WriterRegisterPage() {
     <GuestOnly>
       <AuthShell
         panelTitle="Write. Earn. Grow."
-        panelSubtitle="Join a vetted community of academic writers. A transparent application process — you'll always know exactly where you stand."
+        panelSubtitle="Join a vetted community of academic writers. A transparent application process means you'll always know exactly where you stand."
         panelPoints={[
           {
             title: "Transparent pipeline",
@@ -109,8 +109,8 @@ function WriterRegisterForm() {
   const mutation = useMutation({
     mutationFn: () =>
       registerAccount({
-        // Writers are vetted professionals — a full name is required for
-        // contracts and payouts (unlike anonymous client accounts).
+        // Writers are vetted professionals, so a full name is required for
+        // contracts and payouts (unlike anonymous customer accounts).
         full_name: fullName.trim(),
         email: email.trim(),
         password,
@@ -236,7 +236,7 @@ function WriterRegisterForm() {
       <div className="rounded-2xl border bg-muted/50 p-5">
         <p className="text-sm font-semibold">How you become a writer</p>
         <p className="mt-1 mb-5 text-sm text-muted-foreground">
-          Here's the full journey — you're at step one.
+          Here's the full journey. You're at step one.
         </p>
         <WriterJourney current="apply" />
       </div>

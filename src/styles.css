@@ -3,9 +3,9 @@
 @import "tw-animate-css";
 
 /*
- * AcademicHub Auth — design system (light theme only).
+ * AcademicHub Auth design system (light theme only).
  *
- * Mirrors the public site (academichubpro.com) tokens: pure white surfaces,
+ * Mirrors the public site (scholardesk.pro) tokens: pure white surfaces,
  * royal blue primary, system font stack, soft ink-tinted shadows and
  * generous rounding for a smooth, enterprise-grade feel.
  *
@@ -71,7 +71,7 @@
   --popover: oklch(100% 0 0);
   --popover-foreground: oklch(24% 0.045 259);
 
-  /* Royal blue brand (same as academichubpro.com) */
+  /* Royal blue brand (same as scholardesk.pro) */
   --primary: oklch(55% 0.17 255);
   --primary-foreground: oklch(99% 0.003 250);
   --primary-deep: oklch(29% 0.08 260);

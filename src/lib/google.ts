@@ -3,7 +3,7 @@
  *
  * Set VITE_GOOGLE_CLIENT_ID at build time to enable "Continue with Google".
  * The GIS button produces a credential (ID token) which is exchanged with
- * the AcademicHub API via loginWithGoogle() (POST /auth/google).
+ * the ScholarDesk API via loginWithGoogle() (POST /auth/google).
  *
  * When no client ID is configured the button is simply not rendered.
  */

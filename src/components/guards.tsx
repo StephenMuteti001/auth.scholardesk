@@ -3,18 +3,18 @@ import { Navigate } from "@tanstack/react-router";
 
 import { useAuth } from "@/lib/auth";
 import { resolvePostAuthDestination } from "@/lib/destination";
-import logo from "@/assets/logo/mark-ac-dark.svg";
+import { BRAND } from "@/components/brand/Logo";
 
 export function PageLoader({ label = "Loading…" }: { label?: string }) {
   return (
     <div className="flex min-h-[60vh] flex-col items-center justify-center gap-4">
-      <img src={logo} alt="" className="h-12 w-12 animate-pulse" />
+      <img src={BRAND.monogram} alt="" className="h-12 w-12 animate-pulse" />
       <p className="text-sm text-muted-foreground">{label}</p>
     </div>
   );
 }
 
-/** Hard redirect to an external portal (another academichubpro.com site). */
+/** Hard redirect to an external portal (another scholardesk.pro site). */
 export function ExternalRedirect({ url }: { url: string }) {
   useEffect(() => {
     window.location.replace(url);

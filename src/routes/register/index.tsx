@@ -18,22 +18,22 @@ import { platformSettingsQuery } from "@/lib/platform";
 import { SITE_URL } from "@/lib/destination";
 import { cn } from "@/lib/utils";
 
-const OG_IMAGE = `${SITE_URL}/social/og-image.png`;
+const OG_IMAGE = `${SITE_URL}/brand/og-image.png`;
 
 export const Route = createFileRoute("/register/")({
   head: () => ({
     meta: [
-      { title: "Create an Account | AcademicHub" },
+      { title: "Create an Account | ScholarDesk" },
       {
         name: "description",
         content:
-          "Join AcademicHub as a client to hire verified academic writers, or apply as a writer to earn with your expertise.",
+          "Join ScholarDesk as a customer to hire verified academic experts, or apply as a writer to earn with your expertise.",
       },
-      { property: "og:title", content: "Create an Account | AcademicHub" },
+      { property: "og:title", content: "Create an Account | ScholarDesk" },
       {
         property: "og:description",
         content:
-          "Join AcademicHub as a client to hire verified academic writers, or apply as a writer to earn with your expertise.",
+          "Join ScholarDesk as a customer to hire verified academic experts, or apply as a writer to earn with your expertise.",
       },
       { property: "og:url", content: `${SITE_URL}/register` },
       { property: "og:image", content: OG_IMAGE },
@@ -52,10 +52,10 @@ function RegisterPage() {
     <GuestOnly>
       <AuthShell
         panelTitle="One platform. Two ways in."
-        panelSubtitle="Whether you need academic work done to the highest standard — or you're the expert who does it — your account starts here."
+        panelSubtitle="Whether you need academic work done to the highest standard, or you're the expert who does it, your account starts here."
         panelPoints={[
           {
-            title: "Clients stay anonymous",
+            title: "Customers stay anonymous",
             description:
               "A nickname is all we ask for. Your real identity is never collected.",
           },
@@ -69,7 +69,7 @@ function RegisterPage() {
         <div className="space-y-8">
           <div className="space-y-2">
             <h2 className="font-display text-3xl font-bold tracking-tight">
-              Join AcademicHub
+              Join ScholarDesk
             </h2>
             <p className="text-muted-foreground">
               Choose how you want to use the platform.
@@ -77,16 +77,16 @@ function RegisterPage() {
           </div>
 
           <div className="grid gap-4 sm:grid-cols-2">
-            {/* Client */}
+            {/* Customer */}
             <Link
-              to="/register/client"
+              to="/register/customer"
               className="group rounded-2xl border bg-card p-6 text-left transition-all duration-300 hover:border-primary/40 hover:bg-accent/40 hover:shadow-card-hover"
             >
               <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-primary/10 text-primary">
                 <UserRound className="h-5 w-5" />
               </span>
               <h3 className="mt-4 flex items-center gap-2 text-lg font-semibold">
-                I'm a client
+                I'm a customer
                 <ArrowRight className="h-4 w-4 text-muted-foreground transition-transform group-hover:translate-x-0.5 group-hover:text-primary" />
               </h3>
               <p className="mt-1 text-sm text-muted-foreground">
@@ -137,7 +137,7 @@ function RegisterPage() {
               <p className="mt-1 text-sm text-muted-foreground">
                 {hiringOpen
                   ? "Apply to write and earn with your academic expertise."
-                  : "Applications are paused — see when hiring reopens."}
+                  : "Applications are paused: see when hiring reopens."}
               </p>
               <ul className="mt-4 space-y-2 text-sm text-muted-foreground">
                 <li className="flex items-center gap-2">

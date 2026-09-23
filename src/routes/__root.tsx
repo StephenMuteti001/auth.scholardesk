@@ -84,21 +84,27 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "AcademicHub — Secure Sign In" },
+      { title: "ScholarDesk | Secure Sign In" },
       {
         name: "description",
         content:
-          "Sign in to AcademicHub — the trusted academic writing platform connecting clients with verified expert writers.",
+          "Sign in to ScholarDesk, the trusted academic support platform connecting clients with verified expert writers.",
       },
+      { name: "robots", content: "noindex, nofollow" },
       { property: "og:type", content: "website" },
-      { property: "og:site_name", content: "AcademicHub" },
+      { property: "og:site_name", content: "ScholarDesk" },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "theme-color", content: "#095BE3" },
+      { name: "apple-mobile-web-app-title", content: "ScholarDesk" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
-      { rel: "icon", href: "/favicon/favicon.svg", type: "image/svg+xml" },
-      { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
-      { rel: "apple-touch-icon", href: "/favicon/apple-touch-icon.png" },
+      { rel: "icon", href: "/favicon.ico", sizes: "any" },
+      { rel: "icon", href: "/favicon-16.png", type: "image/png", sizes: "16x16" },
+      { rel: "icon", href: "/favicon-32.png", type: "image/png", sizes: "32x32" },
+      { rel: "icon", href: "/favicon-192.png", type: "image/png", sizes: "192x192" },
+      { rel: "apple-touch-icon", href: "/apple-touch-icon.png", sizes: "192x192" },
+      { rel: "manifest", href: "/site.webmanifest" },
     ],
     scripts: [
       {
@@ -106,9 +112,9 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         children: JSON.stringify({
           "@context": "https://schema.org",
           "@type": "Organization",
-          name: "AcademicHub",
+          name: "ScholarDesk",
           url: PORTALS.PUBLIC,
-          logo: `${PORTALS.PUBLIC}/academichub-logo.PNG`,
+          logo: `${PORTALS.PUBLIC}/brand/wordmark-full-01.png`,
         }),
       },
       {
@@ -116,7 +122,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         children: JSON.stringify({
           "@context": "https://schema.org",
           "@type": "WebSite",
-          name: "AcademicHub",
+          name: "ScholarDesk",
           url: SITE_URL,
         }),
       },

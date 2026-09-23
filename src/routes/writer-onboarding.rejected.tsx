@@ -28,7 +28,7 @@ function RejectedPage() {
         </h1>
         <p className="mx-auto mt-3 max-w-md leading-relaxed text-muted-foreground">
           After careful review, your application didn't meet our current
-          experience and skills requirements. This isn't the end — many of our
+          experience and skills requirements. This isn't the end: many of our
           best writers were accepted on a later attempt.
         </p>
         <p className="mx-auto mt-2 max-w-md text-sm text-muted-foreground">
@@ -38,7 +38,7 @@ function RejectedPage() {
         </p>
         <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
           <Button variant="outline" asChild>
-            <a href={PORTALS.PUBLIC}>Visit AcademicHub</a>
+            <a href={PORTALS.PUBLIC}>Visit ScholarDesk</a>
           </Button>
           <Button variant="ghost" asChild>
             <a href={`${PORTALS.PUBLIC}/contact`}>
@@ -55,9 +55,9 @@ function RejectedPage() {
       </div>
 
       <p className="text-center text-sm text-muted-foreground">
-        Want to use AcademicHub as a client instead?{" "}
-        <Link to="/register/client" className="font-semibold text-primary hover:underline">
-          Create a client account
+        Want to use ScholarDesk as a customer instead?{" "}
+        <Link to="/register/customer" className="font-semibold text-primary hover:underline">
+          Create a customer account
         </Link>
       </p>
     </div>

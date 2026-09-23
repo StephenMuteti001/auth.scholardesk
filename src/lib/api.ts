@@ -1,5 +1,5 @@
 /**
- * API client for the AcademicHub backend (api.academichubpro.com).
+ * API client for the ScholarDesk backend (api.scholardesk.pro).
  *
  * The API authenticates via HttpOnly cookies on the shared parent domain,
  * guarded by a double-submit CSRF cookie (`csrf_access_token`) that must be
@@ -8,7 +8,7 @@
 
 export const API_BASE_URL: string =
   (import.meta.env["VITE_API_URL"] as string | undefined) ??
-  "https://api.academichubpro.com/api/v1";
+  "https://api.scholardesk.pro/api/v1";
 
 export class ApiError extends Error {
   status: number;
@@ -77,7 +77,7 @@ export async function apiFetch<T = unknown>(
   } catch {
     throw new ApiError(
       0,
-      "Unable to reach the AcademicHub server. Check your connection and try again.",
+      "Unable to reach the ScholarDesk server. Check your connection and try again.",
     );
   }
 
@@ -194,7 +194,7 @@ export interface RegisterInput {
   full_name: string;
   email: string;
   password: string;
-  role: "client" | "writer";
+  role: "customer" | "writer";
   country?: string;
   phone?: string;
 }
@@ -206,7 +206,7 @@ export async function registerAccount(input: RegisterInput): Promise<AuthPayload
 
 /**
  * Google sign-in: exchange a Google Identity Services credential (ID token)
- * for an AcademicHub session.
+ * for a ScholarDesk session.
  *
  * Backend contract (to be confirmed by the API team):
  *   POST /auth/google  { credential: string }  ->  standard auth payload
@@ -236,7 +236,7 @@ export async function logout(): Promise<void> {
   try {
     await apiFetch("/auth/logout", { method: "POST" });
   } catch {
-    // Best effort — the session cookie will expire regardless.
+    // Best effort: the session cookie will expire regardless.
   }
 }
 

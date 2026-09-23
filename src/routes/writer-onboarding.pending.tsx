@@ -29,7 +29,7 @@ function PendingPage() {
           Thank you{user?.full_name ? `, ${user.full_name.split(" ")[0]}` : ""}.
           Our editorial team is verifying that your application meets our
           experience and skills requirements. You'll receive an email as soon
-          as a decision is made — typically within 2–3 business days.
+          as a decision is made, typically within 2–3 business days.
         </p>
       </div>
 

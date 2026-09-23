@@ -3,10 +3,10 @@ import { queryOptions } from "@tanstack/react-query";
 import { apiFetch } from "./api";
 
 /**
- * Platform-wide settings shared across the AcademicHub sites.
+ * Platform-wide settings shared across the ScholarDesk sites.
  *
  * The writer hiring switch is controlled from the admin portal
- * (admin.academichubpro.com); this site only READS it.
+ * (admin.scholardesk.pro); this site only READS it.
  *
  * Backend contract:
  *   GET /platform/settings

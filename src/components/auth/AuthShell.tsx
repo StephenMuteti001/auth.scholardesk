@@ -2,7 +2,7 @@ import type { ReactNode } from "react";
 import { Link } from "@tanstack/react-router";
 import { ArrowLeft, Check } from "lucide-react";
 
-import logo from "@/assets/logo/mark-ac-dark.svg";
+import { Logo } from "@/components/brand/Logo";
 import { PORTALS } from "@/lib/destination";
 
 interface AuthShellProps {
@@ -15,7 +15,7 @@ interface AuthShellProps {
 
 /**
  * Shared layout for every auth page: a single light, enterprise-grade
- * surface matching the public site — soft brand wash, centered card,
+ * surface matching the public site: soft brand wash, centered card,
  * generous rounding. No split panels or heavy color blocks.
  */
 export function AuthShell({
@@ -31,10 +31,7 @@ export function AuthShell({
 
       <header className="relative flex items-center justify-between px-5 py-5 sm:px-10">
         <a href={PORTALS.PUBLIC} className="flex items-center">
-          <img src={logo} alt="AcademicHub" className="h-9 w-9" />
-          <span className="text-lg font-bold tracking-tight text-foreground">
-            ademicHub
-          </span>
+          <Logo variant="wordmark" className="h-8" />
         </a>
         <a
           href={PORTALS.PUBLIC}
@@ -96,7 +93,7 @@ export function AuthShell({
 
       <footer className="relative px-6 pb-6 text-center text-xs text-muted-foreground">
         <a href={PORTALS.PUBLIC} className="transition-colors hover:text-foreground">
-          academichubpro.com
+          scholardesk.pro
         </a>
         <span className="mx-2">·</span>
         Secure access portal

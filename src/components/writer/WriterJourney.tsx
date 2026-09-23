@@ -23,7 +23,7 @@ export type JourneyStage =
 interface JourneyStep {
   id: Exclude<JourneyStage, "rejected">;
   title: string;
-  actor: "You" | "AcademicHub";
+  actor: "You" | "ScholarDesk";
   description: string;
   icon: typeof Send;
 }
@@ -34,13 +34,13 @@ const STEPS: JourneyStep[] = [
     title: "Apply through the platform",
     actor: "You",
     description:
-      "Create your writer account and complete the application — credentials, proficiency test and writing samples.",
+      "Create your writer account and complete the application: credentials, proficiency test and writing samples.",
     icon: Send,
   },
   {
     id: "review",
     title: "Application review",
-    actor: "AcademicHub",
+    actor: "ScholarDesk",
     description:
       "We verify that your application meets our required experience and skill standards.",
     icon: FileSearch,
@@ -48,7 +48,7 @@ const STEPS: JourneyStep[] = [
   {
     id: "approved",
     title: "Application approved",
-    actor: "AcademicHub",
+    actor: "ScholarDesk",
     description:
       "Successful applicants are notified by email and on this portal.",
     icon: BadgeCheck,
@@ -64,7 +64,7 @@ const STEPS: JourneyStep[] = [
   {
     id: "activated",
     title: "Account activated",
-    actor: "AcademicHub",
+    actor: "ScholarDesk",
     description:
       "Your writer account is activated and orders become available to you.",
     icon: UnlockKeyhole,
@@ -172,7 +172,7 @@ export function WriterJourney({ current, className }: WriterJourneyProps) {
                       <span className="font-medium text-foreground">
                         respectfully declined
                       </span>{" "}
-                      with feedback from AcademicHub.
+                      with feedback from ScholarDesk.
                     </span>
                   </div>
                 )}

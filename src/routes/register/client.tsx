@@ -16,22 +16,22 @@ import { registerAccount, type AuthUser } from "@/lib/api";
 import { useAuth } from "@/lib/auth";
 import { resolvePostAuthDestination, PORTALS, SITE_URL } from "@/lib/destination";
 
-const OG_IMAGE = `${SITE_URL}/social/og-image.png`;
+const OG_IMAGE = `${SITE_URL}/brand/og-image.png`;
 
 export const Route = createFileRoute("/register/client")({
   head: () => ({
     meta: [
-      { title: "Client Sign Up | AcademicHub" },
+      { title: "Client Sign Up | ScholarDesk" },
       {
         name: "description",
         content:
-          "Create an anonymous AcademicHub client account with just an email and a nickname. Hire verified academic writers with complete privacy.",
+          "Create an anonymous ScholarDesk client account with just an email and a nickname. Hire verified academic writers with complete privacy.",
       },
-      { property: "og:title", content: "Client Sign Up | AcademicHub" },
+      { property: "og:title", content: "Client Sign Up | ScholarDesk" },
       {
         property: "og:description",
         content:
-          "Create an anonymous AcademicHub client account with just an email and a nickname. Hire verified academic writers with complete privacy.",
+          "Create an anonymous ScholarDesk client account with just an email and a nickname. Hire verified academic writers with complete privacy.",
       },
       { property: "og:url", content: `${SITE_URL}/register/client` },
       { property: "og:image", content: OG_IMAGE },
@@ -47,12 +47,12 @@ function ClientRegisterPage() {
     <GuestOnly>
       <AuthShell
         panelTitle="Your privacy is the product."
-        panelSubtitle="AcademicHub never asks clients for a real name. A nickname is all it takes to start hiring verified writers."
+        panelSubtitle="ScholarDesk never asks clients for a real name. A nickname is all it takes to start hiring verified writers."
         panelPoints={[
           {
             title: "No real name, ever",
             description:
-              "You're known only by the nickname you choose — to us and to writers.",
+              "You're known only by the nickname you choose, to us and to writers.",
           },
           {
             title: "Protected from victimisation",
@@ -88,7 +88,7 @@ function ClientRegisterForm() {
   const mutation = useMutation({
     mutationFn: () =>
       registerAccount({
-        // Clients never share a real name — the chosen nickname is the
+        // Clients never share a real name; the chosen nickname is the
         // only identity the backend (and writers) ever see.
         full_name: nickname.trim(),
         email: email.trim(),
@@ -97,7 +97,7 @@ function ClientRegisterForm() {
       }),
     onSuccess: ({ user }) => {
       setUser(user);
-      toast.success("Welcome to AcademicHub!", {
+      toast.success("Welcome to ScholarDesk!", {
         description: "Your private client account is ready.",
       });
       goToDestination(user);
@@ -214,7 +214,7 @@ function ClientRegisterForm() {
 
         <p className="flex items-start gap-2 rounded-xl bg-muted p-3 text-xs leading-relaxed text-muted-foreground">
           <KeyRound className="mt-0.5 h-3.5 w-3.5 shrink-0" />
-          By creating an account you agree to the AcademicHub{" "}
+          By creating an account you agree to the ScholarDesk{" "}
           <a
             href={`${PORTALS.PUBLIC}/terms`}
             className="font-medium text-primary hover:underline"
