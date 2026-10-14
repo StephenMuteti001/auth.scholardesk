@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, createFileRoute, useNavigate } from "@tanstack/react-router";
+import { Link, createFileRoute, useNavigate, useSearch } from "@tanstack/react-router";
 import { useMutation } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { ShieldCheck } from "lucide-react";
@@ -25,8 +25,6 @@ import {
 import { useAuth } from "@/lib/auth";
 import { resolvePostAuthDestination, SITE_URL } from "@/lib/destination";
 
-const OG_IMAGE = `${SITE_URL}/brand/og-image.png`;
-
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
@@ -43,8 +41,8 @@ export const Route = createFileRoute("/")({
           "Secure sign in for ScholarDesk clients and writers. Access orders, messages, and your academic writing workspace.",
       },
       { property: "og:url", content: `${SITE_URL}/` },
-      { property: "og:image", content: OG_IMAGE },
-      { name: "twitter:image", content: OG_IMAGE },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
     ],
     links: [{ rel: "canonical", href: `${SITE_URL}/` }],
   }),
@@ -83,6 +81,7 @@ function LoginPage() {
 
 function LoginForm() {
   const navigate = useNavigate();
+  const { return_to } = useSearch({ strict: false });
   const { setUser } = useAuth();
   const [step, setStep] = useState<"credentials" | "otp">("credentials");
   const [email, setEmail] = useState("");
@@ -92,11 +91,11 @@ function LoginForm() {
   const [redirectTo, setRedirectTo] = useState<string | null>(null);
 
   const goToDestination = (user: AuthUser) => {
-    const destination = resolvePostAuthDestination(user);
+    const destination = resolvePostAuthDestination(user, return_to);
     if (destination.type === "external") {
       setRedirectTo(destination.url);
     } else {
-      navigate({ to: destination.to });
+      navigate({ to: destination.to, search: { return_to } });
     }
   };
 
@@ -249,7 +248,8 @@ function LoginForm() {
             {otpMutation.isPending ? "Verifying…" : "Verify & sign in"}
           </Button>
 
-          <button
+          <Button
+            variant="ghost"
             type="button"
             onClick={() => {
               setStep("credentials");
@@ -258,7 +258,7 @@ function LoginForm() {
             className="w-full text-center text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
           >
             Use a different email
-          </button>
+          </Button>
         </form>
       )}
 
@@ -266,6 +266,7 @@ function LoginForm() {
         New to ScholarDesk?{" "}
         <Link
           to="/register"
+          search={true}
           className="font-semibold text-primary hover:underline"
         >
           Create an account

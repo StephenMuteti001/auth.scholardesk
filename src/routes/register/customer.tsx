@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, createFileRoute } from "@tanstack/react-router";
+import { Link, createFileRoute, useSearch, useNavigate } from "@tanstack/react-router";
 import { useMutation } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { EyeOff, KeyRound, ShieldCheck, UserRound } from "lucide-react";
@@ -15,8 +15,6 @@ import { isGoogleSignInConfigured } from "@/lib/google";
 import { registerAccount, type AuthUser } from "@/lib/api";
 import { useAuth } from "@/lib/auth";
 import { resolvePostAuthDestination, PORTALS, SITE_URL } from "@/lib/destination";
-
-const OG_IMAGE = `${SITE_URL}/brand/og-image.png`;
 
 export const Route = createFileRoute("/register/customer")({
   head: () => ({
@@ -34,8 +32,8 @@ export const Route = createFileRoute("/register/customer")({
           "Create an anonymous ScholarDesk customer account with just an email and a nickname. Hire verified academic experts with complete privacy.",
       },
       { property: "og:url", content: `${SITE_URL}/register/customer` },
-      { property: "og:image", content: OG_IMAGE },
-      { name: "twitter:image", content: OG_IMAGE },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
     ],
     links: [{ rel: "canonical", href: `${SITE_URL}/register/customer` }],
   }),
@@ -73,6 +71,8 @@ function CustomerRegisterPage() {
 }
 
 function CustomerRegisterForm() {
+  const { return_to } = useSearch({ strict: false });
+  const navigate = useNavigate();
   const { setUser } = useAuth();
   const [nickname, setNickname] = useState("");
   const [email, setEmail] = useState("");
@@ -81,8 +81,9 @@ function CustomerRegisterForm() {
   const [redirectTo, setRedirectTo] = useState<string | null>(null);
 
   const goToDestination = (user: AuthUser) => {
-    const destination = resolvePostAuthDestination(user);
+    const destination = resolvePostAuthDestination(user, return_to);
     if (destination.type === "external") setRedirectTo(destination.url);
+    else navigate({ to: destination.to, search: { return_to } });
   };
 
   const mutation = useMutation({
@@ -235,7 +236,7 @@ function CustomerRegisterForm() {
       <div className="space-y-2 text-center text-sm text-muted-foreground">
         <p>
           Already have an account?{" "}
-          <Link to="/" className="font-semibold text-primary hover:underline">
+          <Link to="/" search={true} className="font-semibold text-primary hover:underline">
             Sign in
           </Link>
         </p>
@@ -243,6 +244,7 @@ function CustomerRegisterForm() {
           Looking to write instead?{" "}
           <Link
             to="/register/writer"
+            search={true}
             className="font-semibold text-primary hover:underline"
           >
             Apply as a writer

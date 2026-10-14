@@ -17,7 +17,7 @@ export const Route = createFileRoute("/writer-onboarding")({
 function WriterOnboardingLayout() {
   return (
     <RequireAuth roles={["writer"]}>
-      <div className="flex min-h-screen flex-col bg-surface">
+      <div className="flex min-h-screen flex-col bg-background">
         <OnboardingHeader />
         <main className="mx-auto w-full max-w-3xl flex-1 px-4 py-10 sm:px-6">
           <Outlet />
@@ -42,10 +42,11 @@ function OnboardingHeader() {
   };
 
   return (
-    <header className="sticky top-0 z-20 border-b bg-card/90 backdrop-blur">
+    <header className="sticky top-0 z-20 border-b bg-background">
       <div className="mx-auto flex h-16 w-full max-w-3xl items-center justify-between px-4 sm:px-6">
         <Link to="/writer-onboarding/apply" aria-label="ScholarDesk writer onboarding">
-          <Logo variant="wordmark" className="h-7" />
+          <Logo variant="signature" className="h-6 sm:hidden" />
+          <Logo variant="wordmark" className="hidden h-7 sm:block" />
         </Link>
         <div className="flex items-center gap-3">
           <span className="hidden max-w-45 truncate text-sm text-muted-foreground sm:block">

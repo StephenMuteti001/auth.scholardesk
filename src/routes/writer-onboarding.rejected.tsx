@@ -1,25 +1,30 @@
-import { Link, Navigate, createFileRoute } from "@tanstack/react-router";
+import { Link, Navigate, createFileRoute, useSearch } from "@tanstack/react-router";
+import { ExternalRedirect } from "@/components/guards";
+import { pageMeta } from "@/lib/page-meta";
 import { LifeBuoy, XCircle } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { WriterJourney } from "@/components/writer/WriterJourney";
 import { useAuth } from "@/lib/auth";
-import { writerOnboardingPath, PORTALS } from "@/lib/destination";
+import { resolvePostAuthDestination, PORTALS } from "@/lib/destination";
 
 export const Route = createFileRoute("/writer-onboarding/rejected")({
+  head: () => pageMeta("Application Outcome", "View your ScholarDesk writer application outcome and support options."),
   component: RejectedPage,
 });
 
 function RejectedPage() {
   const { user } = useAuth();
+  const { return_to } = useSearch({ strict: false });
 
   if (user && user.application_status !== "rejected") {
-    return <Navigate to={writerOnboardingPath(user?.application_status)} />;
+    const destination = resolvePostAuthDestination(user, return_to);
+    return destination.type === "external" ? <ExternalRedirect url={destination.url} /> : <Navigate to={destination.to} search={true} replace />;
   }
 
   return (
     <div className="space-y-8">
-      <div className="rounded-2xl border bg-card p-8 text-center shadow-card sm:p-10">
+      <div className="rounded-lg border bg-card p-8 text-center sm:p-10">
         <span className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-destructive/10">
           <XCircle className="h-7 w-7 text-destructive" />
         </span>
@@ -49,7 +54,7 @@ function RejectedPage() {
         </div>
       </div>
 
-      <div className="rounded-2xl border bg-card p-6 shadow-card sm:p-8">
+      <div className="rounded-lg border bg-card p-6 sm:p-8">
         <h2 className="text-lg font-semibold">Your application journey</h2>
         <WriterJourney current="rejected" className="mt-6" />
       </div>

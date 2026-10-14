@@ -1,5 +1,5 @@
 import { useEffect, type ReactNode } from "react";
-import { Navigate } from "@tanstack/react-router";
+import { Navigate, useSearch } from "@tanstack/react-router";
 
 import { useAuth } from "@/lib/auth";
 import { resolvePostAuthDestination } from "@/lib/destination";
@@ -32,9 +32,10 @@ export function RequireAuth({ children, roles }: RequireAuthProps) {
   const { user, isLoading } = useAuth();
 
   if (isLoading) return <PageLoader />;
-  if (!user) return <Navigate to="/" />;
-  if (roles && user.role && !roles.includes(user.role)) {
-    return <Navigate to="/" />;
+  if (!user) return <Navigate to="/" search={true} replace />;
+  const role = user.role === "expert" ? "writer" : user.role;
+  if (roles && (!role || !roles.includes(role))) {
+    return <Navigate to="/" search={true} replace />;
   }
   return <>{children}</>;
 }
@@ -45,14 +46,15 @@ export function RequireAuth({ children, roles }: RequireAuthProps) {
  */
 export function GuestOnly({ children }: { children: ReactNode }) {
   const { user, isLoading } = useAuth();
+  const { return_to } = useSearch({ strict: false });
 
   if (isLoading) return <PageLoader />;
   if (user) {
-    const destination = resolvePostAuthDestination(user);
+    const destination = resolvePostAuthDestination(user, return_to);
     if (destination.type === "external") {
       return <ExternalRedirect url={destination.url} />;
     }
-    return <Navigate to={destination.to} />;
+    return <Navigate to={destination.to} search={{ return_to }} replace />;
   }
   return <>{children}</>;
 }

@@ -118,7 +118,7 @@ export function WriterJourney({ current, className }: WriterJourneyProps) {
                   "z-10 flex h-10 w-10 shrink-0 items-center justify-center rounded-full border",
                   isDone && "border-success/30 bg-success/10 text-success",
                   isCurrent &&
-                    "border-primary bg-primary text-primary-foreground shadow-card",
+                    "border-primary bg-primary text-primary-foreground",
                   !isDone && !isCurrent && "bg-card text-muted-foreground",
                 )}
               >

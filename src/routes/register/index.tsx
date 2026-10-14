@@ -18,8 +18,6 @@ import { platformSettingsQuery } from "@/lib/platform";
 import { SITE_URL } from "@/lib/destination";
 import { cn } from "@/lib/utils";
 
-const OG_IMAGE = `${SITE_URL}/brand/og-image.png`;
-
 export const Route = createFileRoute("/register/")({
   head: () => ({
     meta: [
@@ -36,8 +34,8 @@ export const Route = createFileRoute("/register/")({
           "Join ScholarDesk as a customer to hire verified academic experts, or apply as a writer to earn with your expertise.",
       },
       { property: "og:url", content: `${SITE_URL}/register` },
-      { property: "og:image", content: OG_IMAGE },
-      { name: "twitter:image", content: OG_IMAGE },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
     ],
     links: [{ rel: "canonical", href: `${SITE_URL}/register` }],
   }),
@@ -80,7 +78,8 @@ function RegisterPage() {
             {/* Customer */}
             <Link
               to="/register/customer"
-              className="group rounded-2xl border bg-card p-6 text-left transition-all duration-300 hover:border-primary/40 hover:bg-accent/40 hover:shadow-card-hover"
+              search={true}
+              className="group rounded-lg border bg-card p-6 text-left transition-colors duration-300 hover:border-primary/40 hover:bg-accent/40"
             >
               <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-primary/10 text-primary">
                 <UserRound className="h-5 w-5" />
@@ -111,8 +110,9 @@ function RegisterPage() {
             {/* Writer */}
             <Link
               to="/register/writer"
+              search={true}
               className={cn(
-                "group rounded-2xl border bg-card p-6 text-left transition-all duration-300 hover:border-primary/40 hover:bg-accent/40 hover:shadow-card-hover",
+                "group rounded-lg border bg-card p-6 text-left transition-colors duration-300 hover:border-primary/40 hover:bg-accent/40",
                 !hiringOpen && "opacity-90",
               )}
             >
@@ -158,7 +158,7 @@ function RegisterPage() {
 
           <p className="text-center text-sm text-muted-foreground">
             Already have an account?{" "}
-            <Link to="/" className="font-semibold text-primary hover:underline">
+            <Link to="/" search={true} className="font-semibold text-primary hover:underline">
               Sign in
             </Link>
           </p>

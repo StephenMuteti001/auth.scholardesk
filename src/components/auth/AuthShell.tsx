@@ -14,9 +14,8 @@ interface AuthShellProps {
 }
 
 /**
- * Shared layout for every auth page: a single light, enterprise-grade
- * surface matching the public site: soft brand wash, centered card,
- * generous rounding. No split panels or heavy color blocks.
+ * Shared layout for every auth page: a light, flat surface matching the
+ * public site, with crisp borders and no decorative elevation.
  */
 export function AuthShell({
   children,
@@ -25,24 +24,22 @@ export function AuthShell({
   panelPoints,
 }: AuthShellProps) {
   return (
-    <div className="relative flex min-h-screen flex-col bg-background">
-      {/* Subtle brand wash */}
-      <div aria-hidden className="bg-hero-wash pointer-events-none absolute inset-0" />
-
-      <header className="relative flex items-center justify-between px-5 py-5 sm:px-10">
+    <div className="flex min-h-screen flex-col bg-background">
+      <header className="flex items-center justify-between border-b bg-background px-5 py-5 sm:px-10">
         <a href={PORTALS.PUBLIC} className="flex items-center">
-          <Logo variant="wordmark" className="h-8" />
+          <Logo variant="signature" className="h-7 sm:hidden" />
+          <Logo variant="wordmark" className="hidden h-8 sm:block" />
         </a>
         <a
           href={PORTALS.PUBLIC}
-          className="inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-sm font-medium text-muted-foreground transition-colors duration-300 hover:bg-accent hover:text-foreground"
+          className="inline-flex items-center gap-1.5 px-2 py-1.5 text-sm font-medium text-muted-foreground transition-colors duration-300 hover:text-primary"
         >
           <ArrowLeft className="h-4 w-4" />
           Back to main site
         </a>
       </header>
 
-      <main className="relative flex flex-1 flex-col items-center px-4 pt-4 pb-16 sm:pt-8">
+      <main className="flex flex-1 flex-col items-center px-4 pt-8 pb-16 sm:pt-12">
         <div className="w-full max-w-xl">
           {/* Intro */}
           <div className="mb-8 space-y-2 text-center">
@@ -54,8 +51,8 @@ export function AuthShell({
             </p>
           </div>
 
-          {/* Working card */}
-          <div className="rounded-2xl border bg-card p-6 shadow-card sm:p-10">
+          {/* Working surface */}
+          <div className="rounded-lg border bg-card p-6 sm:p-10">
             {children}
           </div>
 
@@ -71,7 +68,7 @@ export function AuthShell({
               {panelPoints.map((point) => (
                 <li
                   key={point.title}
-                  className="flex items-start gap-2.5 rounded-xl bg-surface px-4 py-3"
+                  className="flex items-start gap-2.5 border-t px-1 py-4"
                 >
                   <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-success/15 text-success">
                     <Check className="h-3 w-3" />
@@ -91,9 +88,10 @@ export function AuthShell({
         </div>
       </main>
 
-      <footer className="relative px-6 pb-6 text-center text-xs text-muted-foreground">
-        <a href={PORTALS.PUBLIC} className="transition-colors hover:text-foreground">
-          scholardesk.pro
+      <footer className="border-t px-6 py-5 text-center text-xs text-muted-foreground">
+        <a href={PORTALS.PUBLIC} className="inline-flex items-center transition-colors hover:text-foreground sm:inline">
+          <Logo variant="signature" className="h-5 sm:hidden" />
+          <span className="hidden sm:inline">scholardesk.pro</span>
         </a>
         <span className="mx-2">·</span>
         Secure access portal

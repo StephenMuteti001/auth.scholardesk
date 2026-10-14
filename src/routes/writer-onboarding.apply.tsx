@@ -1,5 +1,7 @@
 import { useMemo, useState } from "react";
-import { Navigate, createFileRoute } from "@tanstack/react-router";
+import { Navigate, createFileRoute, useSearch } from "@tanstack/react-router";
+import { ExternalRedirect } from "@/components/guards";
+import { pageMeta } from "@/lib/page-meta";
 import { useMutation } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { ArrowLeft, ArrowRight, Check, Send } from "lucide-react";
@@ -19,7 +21,7 @@ import {
 import { WriterJourney } from "@/components/writer/WriterJourney";
 import { useAuth } from "@/lib/auth";
 import { submitWriterApplication } from "@/lib/api";
-import { writerOnboardingPath } from "@/lib/destination";
+import { resolvePostAuthDestination } from "@/lib/destination";
 import {
   COUNTRIES,
   EDUCATION_LEVELS,
@@ -31,6 +33,7 @@ import {
 import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/writer-onboarding/apply")({
+  head: () => pageMeta("Writer Application", "Complete your ScholarDesk writer profile, proficiency test, and writing samples."),
   component: ApplyPage,
 });
 
@@ -38,10 +41,12 @@ const STEPS = ["Your profile", "Proficiency test", "Writing samples", "Essay & s
 
 function ApplyPage() {
   const { user } = useAuth();
+  const { return_to } = useSearch({ strict: false });
 
   // If the writer already applied, land them on the right status page.
   if (user && user.application_status && user.application_status !== "not_applied") {
-    return <Navigate to={writerOnboardingPath(user.application_status)} />;
+    const destination = resolvePostAuthDestination(user, return_to);
+    return destination.type === "external" ? <ExternalRedirect url={destination.url} /> : <Navigate to={destination.to} search={true} replace />;
   }
 
   return <ApplicationWizard />;
@@ -146,7 +151,7 @@ function ApplicationWizard() {
         ))}
       </div>
 
-      <div className="rounded-2xl border bg-card p-6 shadow-card sm:p-8">
+      <div className="rounded-lg border bg-card p-6 sm:p-8">
         {step === 0 && (
           <div className="space-y-5">
             <div className="space-y-2">

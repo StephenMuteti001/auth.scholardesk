@@ -16,7 +16,7 @@ interface HiringClosedProps {
 export function HiringClosed({ notice }: HiringClosedProps) {
   return (
     <div className="space-y-8">
-      <div className="rounded-2xl border bg-card p-8 text-center shadow-card sm:p-10">
+      <div className="rounded-lg border bg-card p-8 text-center sm:p-10">
         <span className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-warning/15">
           <CalendarClock className="h-7 w-7 text-warning-foreground" />
         </span>

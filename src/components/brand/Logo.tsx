@@ -8,7 +8,7 @@
  *   /brand/monogram-blue.png     standalone mark, light backgrounds  (01)
  *   /brand/monogram-navy.png     standalone mark, deep-ink tone      (02)
  *   /brand/monogram-reverse.png  mark on a blue field / dark photo   (03)
- *   /brand/signature-white.png   compact monogram + "esk" signature  (04)
+ *   /brand/wordmark-full.png     compact monogram + "esk" signature  (04)
  *   /brand/signature-reverse.png signature on a blue field           (06)
  *   /brand/wordmark-full-01.png  full "ScholarDesk" lockup           (07)
  *   /brand/og-image.png          social share card, light            (09)
@@ -17,7 +17,7 @@ export const BRAND = {
   monogram: "/brand/monogram-blue.png",
   monogramNavy: "/brand/monogram-navy.png",
   monogramReverse: "/brand/monogram-reverse.png",
-  signature: "/brand/signature-white.png",
+  signature: "/brand/wordmark-full.png",
   signatureReverse: "/brand/signature-reverse.png",
   wordmark: "/brand/wordmark-full-01.png",
   ogImage: "/brand/og-image.png",

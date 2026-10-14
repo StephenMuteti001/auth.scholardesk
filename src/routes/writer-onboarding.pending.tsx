@@ -1,24 +1,29 @@
-import { Navigate, createFileRoute } from "@tanstack/react-router";
+import { Navigate, createFileRoute, useSearch } from "@tanstack/react-router";
+import { ExternalRedirect } from "@/components/guards";
+import { pageMeta } from "@/lib/page-meta";
 import { FileSearch } from "lucide-react";
 
 import { WriterJourney } from "@/components/writer/WriterJourney";
 import { useAuth } from "@/lib/auth";
-import { writerOnboardingPath } from "@/lib/destination";
+import { resolvePostAuthDestination } from "@/lib/destination";
 
 export const Route = createFileRoute("/writer-onboarding/pending")({
+  head: () => pageMeta("Application Under Review", "Check the review stage of your ScholarDesk writer application."),
   component: PendingPage,
 });
 
 function PendingPage() {
   const { user } = useAuth();
+  const { return_to } = useSearch({ strict: false });
 
   if (user && user.application_status !== "applied") {
-    return <Navigate to={writerOnboardingPath(user?.application_status)} />;
+    const destination = resolvePostAuthDestination(user, return_to);
+    return destination.type === "external" ? <ExternalRedirect url={destination.url} /> : <Navigate to={destination.to} search={true} replace />;
   }
 
   return (
     <div className="space-y-8">
-      <div className="rounded-2xl border bg-card p-8 text-center shadow-card sm:p-10">
+      <div className="rounded-lg border bg-card p-8 text-center sm:p-10">
         <span className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-primary/10">
           <FileSearch className="h-7 w-7 text-primary" />
         </span>
@@ -33,7 +38,7 @@ function PendingPage() {
         </p>
       </div>
 
-      <div className="rounded-2xl border bg-card p-6 shadow-card sm:p-8">
+      <div className="rounded-lg border bg-card p-6 sm:p-8">
         <h2 className="text-lg font-semibold">Where you are in the journey</h2>
         <WriterJourney current="review" className="mt-6" />
       </div>

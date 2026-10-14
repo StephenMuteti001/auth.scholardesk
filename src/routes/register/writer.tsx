@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, createFileRoute, useNavigate } from "@tanstack/react-router";
+import { Link, createFileRoute, useNavigate, useSearch } from "@tanstack/react-router";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { Loader2 } from "lucide-react";
@@ -20,8 +20,6 @@ import { registerAccount, type AuthUser } from "@/lib/api";
 import { useAuth } from "@/lib/auth";
 import { resolvePostAuthDestination, SITE_URL } from "@/lib/destination";
 
-const OG_IMAGE = `${SITE_URL}/brand/og-image.png`;
-
 export const Route = createFileRoute("/register/writer")({
   head: () => ({
     meta: [
@@ -38,8 +36,8 @@ export const Route = createFileRoute("/register/writer")({
           "Apply to join ScholarDesk as an academic writer. Clear application steps, fair review, and reliable payouts for verified experts.",
       },
       { property: "og:url", content: `${SITE_URL}/register/writer` },
-      { property: "og:image", content: OG_IMAGE },
-      { name: "twitter:image", content: OG_IMAGE },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
     ],
     links: [{ rel: "canonical", href: `${SITE_URL}/register/writer` }],
   }),
@@ -90,6 +88,7 @@ function WriterRegisterPage() {
 
 function WriterRegisterForm() {
   const navigate = useNavigate();
+  const { return_to } = useSearch({ strict: false });
   const { setUser } = useAuth();
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
@@ -98,11 +97,11 @@ function WriterRegisterForm() {
   const [redirectTo, setRedirectTo] = useState<string | null>(null);
 
   const goToDestination = (user: AuthUser) => {
-    const destination = resolvePostAuthDestination(user);
+    const destination = resolvePostAuthDestination(user, return_to);
     if (destination.type === "external") {
       setRedirectTo(destination.url);
     } else {
-      navigate({ to: destination.to });
+      navigate({ to: destination.to, search: { return_to } });
     }
   };
 
@@ -243,7 +242,7 @@ function WriterRegisterForm() {
 
       <p className="text-center text-sm text-muted-foreground">
         Already have an account?{" "}
-        <Link to="/" className="font-semibold text-primary hover:underline">
+        <Link to="/" search={true} className="font-semibold text-primary hover:underline">
           Sign in
         </Link>
       </p>

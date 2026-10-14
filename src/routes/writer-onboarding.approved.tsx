@@ -1,25 +1,30 @@
-import { Navigate, createFileRoute } from "@tanstack/react-router";
+import { Navigate, createFileRoute, useSearch } from "@tanstack/react-router";
+import { ExternalRedirect } from "@/components/guards";
+import { pageMeta } from "@/lib/page-meta";
 import { BadgeCheck, Mail, Wallet } from "lucide-react";
 
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { WriterJourney } from "@/components/writer/WriterJourney";
 import { useAuth } from "@/lib/auth";
-import { writerOnboardingPath } from "@/lib/destination";
+import { resolvePostAuthDestination } from "@/lib/destination";
 
 export const Route = createFileRoute("/writer-onboarding/approved")({
+  head: () => pageMeta("Writer Activation", "View the activation stage and deposit instructions for your approved ScholarDesk application."),
   component: ApprovedPage,
 });
 
 function ApprovedPage() {
   const { user } = useAuth();
+  const { return_to } = useSearch({ strict: false });
 
   if (user && user.application_status !== "awaiting_initial_deposit") {
-    return <Navigate to={writerOnboardingPath(user?.application_status)} />;
+    const destination = resolvePostAuthDestination(user, return_to);
+    return destination.type === "external" ? <ExternalRedirect url={destination.url} /> : <Navigate to={destination.to} search={true} replace />;
   }
 
   return (
     <div className="space-y-8">
-      <div className="rounded-2xl border border-success/30 bg-card p-8 text-center shadow-card sm:p-10">
+      <div className="rounded-lg border border-success/30 bg-card p-8 text-center sm:p-10">
         <span className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-success/15">
           <BadgeCheck className="h-7 w-7 text-success" />
         </span>
@@ -32,7 +37,7 @@ function ApprovedPage() {
         </p>
       </div>
 
-      <div className="rounded-2xl border bg-card p-6 shadow-card sm:p-8">
+      <div className="rounded-lg border bg-card p-6 sm:p-8">
         <div className="flex items-start gap-4">
           <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-primary/10">
             <Wallet className="h-5 w-5 text-primary" />
@@ -58,7 +63,7 @@ function ApprovedPage() {
         </Alert>
       </div>
 
-      <div className="rounded-2xl border bg-card p-6 shadow-card sm:p-8">
+      <div className="rounded-lg border bg-card p-6 sm:p-8">
         <h2 className="text-lg font-semibold">Where you are in the journey</h2>
         <WriterJourney current="deposit" className="mt-6" />
       </div>

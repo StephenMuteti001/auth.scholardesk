@@ -3,11 +3,11 @@
 @import "tw-animate-css";
 
 /*
- * AcademicHub Auth design system (light theme only).
+ * ScholarDesk Auth design system (light theme only).
  *
  * Mirrors the public site (scholardesk.pro) tokens: pure white surfaces,
- * royal blue primary, system font stack, soft ink-tinted shadows and
- * generous rounding for a smooth, enterprise-grade feel.
+ * royal blue primary, system font stack, crisp borders and restrained
+ * rounding for the same calm, flat visual language as the public site.
  *
  * All colors use oklch. To add a new semantic color:
  * 1. Add the variable to :root
@@ -22,13 +22,19 @@
 }
 
 @theme inline {
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
+  --radius-sm: calc(var(--radius) - 2px);
+  --radius-md: var(--radius);
   --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
-  --radius-2xl: calc(var(--radius) + 8px);
-  --radius-3xl: calc(var(--radius) + 12px);
-  --radius-4xl: calc(var(--radius) + 16px);
+  --radius-xl: var(--radius);
+  --radius-2xl: var(--radius);
+  --radius-3xl: var(--radius);
+  --radius-4xl: var(--radius);
+  --shadow-xs: none;
+  --shadow-sm: none;
+  --shadow-md: none;
+  --shadow-lg: none;
+  --shadow-xl: none;
+  --shadow-2xl: none;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -60,7 +66,7 @@
 }
 
 :root {
-  --radius: 0.75rem;
+  --radius: 0.375rem;
 
   /* Pure white background, deep ink text (matches public site) */
   --background: oklch(100% 0 0);
@@ -102,12 +108,21 @@
   --border: oklch(91.8% 0.012 253);
   --input: oklch(91.8% 0.012 253);
   --ring: oklch(55% 0.17 255);
+  --scrollbar-thumb: var(--border);
+  --scrollbar-thumb-hover: var(--muted-foreground);
 }
 
 @layer base {
   * {
     border-color: var(--color-border);
+    scrollbar-width: thin;
+    scrollbar-color: var(--scrollbar-thumb) var(--background);
   }
+
+  *::-webkit-scrollbar { width: 6px; height: 6px; }
+  *::-webkit-scrollbar-track { background: var(--background); }
+  *::-webkit-scrollbar-thumb { background: var(--scrollbar-thumb); border-radius: 3px; }
+  *::-webkit-scrollbar-thumb:hover { background: var(--scrollbar-thumb-hover); }
 
   html {
     scroll-behavior: smooth;
@@ -126,7 +141,7 @@
   h3,
   .font-display {
     font-family: var(--font-display);
-    letter-spacing: -0.02em;
+    letter-spacing: 0;
   }
 
   /* Smooth, consistent interaction motion across the portal */
@@ -140,26 +155,3 @@
   }
 }
 
-@layer utilities {
-  /* Whisper-soft brand wash behind auth pages */
-  .bg-hero-wash {
-    background-image: linear-gradient(
-      160deg,
-      color-mix(in oklab, var(--primary) 7%, white) 0%,
-      white 42%,
-      color-mix(in oklab, var(--primary) 4%, white) 100%
-    );
-  }
-
-  .shadow-card {
-    box-shadow:
-      0 1px 2px color-mix(in oklab, var(--ink) 5%, transparent),
-      0 6px 20px -6px color-mix(in oklab, var(--ink) 7%, transparent);
-  }
-
-  .shadow-card-hover {
-    box-shadow:
-      0 2px 4px color-mix(in oklab, var(--ink) 6%, transparent),
-      0 18px 44px -14px color-mix(in oklab, var(--ink) 13%, transparent);
-  }
-}
